@@ -10,6 +10,10 @@ class Question extends Model
         'content', 'class', 'subject_id', 'tags', 'created_by'
     ];
 
+    protected $hidden = [
+        'created_at', 'updated_at'
+    ];
+
     public function answers()
     {
         return $this->hasMany(Answer::class);

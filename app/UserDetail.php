@@ -10,6 +10,10 @@ class UserDetail extends Model
         'user_id', 'birthday', 'phone', 'school', 'address', 'avatar',
     ];
 
+    protected $hidden = [
+        'created_at', 'updated_at'
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);

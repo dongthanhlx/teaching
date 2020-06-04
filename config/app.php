@@ -1,5 +1,6 @@
 <?php
 
+use App\Providers\GoogleDriveServiceProvider;
 use Tymon\JWTAuth\Providers\AbstractServiceProvider;
 
 return [
@@ -176,7 +177,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
+        GoogleDriveServiceProvider::class,
     ],
 
     /*

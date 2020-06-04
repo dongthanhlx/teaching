@@ -10,6 +10,10 @@ class Answer extends Model
         'content', 'question_id', 'is_true', 'created_by'
     ];
 
+    protected $hidden = [
+        'created_at', 'updated_at'
+    ];
+
     public function isTrue()
     {
         return $this->is_true;

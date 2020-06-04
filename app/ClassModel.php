@@ -10,6 +10,10 @@ class ClassModel extends Model
         'name', 'code', 'teacher_id'
     ];
 
+    protected $hidden = [
+        'created_at', 'updated_at'
+    ];
+
     public function teacher()
     {
         return $this->hasOne(User::class, 'teacher_id');

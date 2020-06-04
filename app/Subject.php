@@ -10,6 +10,10 @@ class Subject extends Model
         'name'
     ];
 
+    protected $hidden = [
+        'created_at', 'updated_at'
+    ];
+
     protected function find($id)
     {
         return $this->findOrFail($id);

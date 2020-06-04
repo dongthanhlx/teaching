@@ -16,7 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-
+/*
 Route::post('login', 'JWTAuthController@login')->name('login');
 Route::post('register', 'JWTAuthController@register')->name('register');
-Route::post('upload', 'GoogleDriveController@store')->name('upload');
+Route::post('upload', 'GoogleDriveController@store')->name('upload');*/
+Route::get('/user', 'UserController@index');

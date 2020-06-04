@@ -15,11 +15,6 @@ class PutFile implements ShouldQueue
 
     protected $name;
 
-    /**
-     * Create a new job instance.
-     *
-     * @return void
-     */
     public function __construct($name)
     {
         $this->name = $name;
@@ -28,7 +23,7 @@ class PutFile implements ShouldQueue
     public function handle()
     {
         $filePut = Storage::disk('public')->get('exams/' . $this->name);
-        Storage::cloud()->put('/' . $this->name, $filePut);
+        Storage::cloud()->put($this->name, $filePut);
         Storage::disk('public')->delete('exams/' . $this->name);
     }
 }

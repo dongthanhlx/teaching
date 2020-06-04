@@ -19,6 +19,10 @@ class Exam extends Model
         'created_by'
     ];
 
+    protected $hidden = [
+        'created_at', 'updated_at'
+    ];
+
     public function questions()
     {
         return $this->belongsToMany(Question::class, 'exams_questions', 'exam_id', 'question_id');

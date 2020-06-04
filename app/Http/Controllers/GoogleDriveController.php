@@ -10,11 +10,14 @@ class GoogleDriveController extends Controller
 {
     public function store(Request $request)
     {
-       /* $request->validate([
+        $request->validate([
             'file' => 'required|mimetypes:application/pdf|max:10000'
-        ]);*/
+        ]);
 
         $fileName = $request->file('file')->getClientOriginalName();
+
+        $request->file('file')->move(storage_path('app/public/exams'), $fileName);
+
         PutFile::dispatch($fileName);
 
         // Get the file to find the ID
@@ -27,9 +30,6 @@ class GoogleDriveController extends Controller
             ->where('extension', '=', pathinfo($fileName, PATHINFO_EXTENSION))
             ->first(); // there can be duplicate file names!
 
-        // Change permissions
-        // - https://developers.google.com/drive/v3/web/about-permissions
-        // - https://developers.google.com/drive/v3/reference/permissions
         $service = Storage::cloud()->getAdapter()->getService();
         $permission = new \Google_Service_Drive_Permission();
         $permission->setRole('reader');
