@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Subject extends Model
 {
     protected $fillable = [
-        'name'
+        'name', 'created_by'
     ];
 
     protected $hidden = [
@@ -19,17 +19,18 @@ class Subject extends Model
         return $this->findOrFail($id);
     }
 
-    public function add($request)
+    public function add($input, $creator)
     {
         return $this->create([
-            'name' => $request->name
+            'name' => $input['name'],
+            'created_by' => $creator->id
         ]);
     }
 
-    public function edit($request, $id)
+    public function edit($input, $id)
     {
         $subject = $this->find($id);
-        $subject->name = $request->name;
+        $subject->name = $input['name'];
         return $subject->save();
     }
 

@@ -24,21 +24,21 @@ class Answer extends Model
         return $this->findOrFail($id);
     }
 
-    public function add($request)
+    public function add($input, $creator)
     {
         return $this->create([
-            'content' => $request->content,
-            'question_id' => $request->questionId,
-            'is_true' => $request->isTrue,
-            'created_by' => $request->user()->id,
+            'content' => $input['content'],
+            'question_id' => $input['questionId'],
+            'is_true' => $input['isTrue'],
+            'created_by' => $creator->id,
         ]);
     }
 
-    public function edit($request, $id)
+    public function edit($input, $id)
     {
         $answer = $this->find($id);
-        $answer->content = $request->content;
-        $answer->is_true = $request->isTrue;
+        $answer->content = $input['content'];
+        $answer->is_true = $input['isTrue'];
         $answer->save();
 
         return $answer;

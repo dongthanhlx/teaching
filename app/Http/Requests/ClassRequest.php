@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class ClassRequest extends FormRequest
 {
@@ -26,7 +28,19 @@ class ClassRequest extends FormRequest
         return [
             'name' => 'required',
             'code' => 'required',
-            'teacher_id' => 'required|numeric'
+            'teacherId' => 'required|numeric'
         ];
+    }
+
+    public function messages()
+    {
+        return [
+            'required' => 'The :attribute field is required'
+        ];
+    }
+
+    protected function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(response()->json($validator->errors(), 422));
     }
 }

@@ -10,34 +10,32 @@ class SubjectController extends Controller
 {
     protected $subject;
 
-    public function __construct()
+    /**
+     * SubjectController constructor.
+     * @param $subject
+     */
+    public function __construct(Subject $subject)
     {
-        $this->subject = new Subject();
+        $this->subject = $subject;
     }
 
     public function store(SubjectRequest $request)
     {
-        $validated = $request->validated();
-        if (! $validated) return null;
-
-        $result = $this->subject->add($request);
-        return response()->json($result, 200);
+        $request->validated();
+        $this->subject = $this->subject->add($request->all(), $request->user());
+        return response()->json($this->subject, 200);
     }
 
     public function update(SubjectRequest $request, $id)
     {
-        $validated = $request->validated();
-
-        if (! $validated) return null;
-
-        $result = $this->subject->edit($request, $id);
-        return response()->json($result, 200);
+        $request->validated();
+        $this->subject = $this->subject->edit($request, $id);
+        return response()->json($this->subject, 200);
     }
 
     public function delete($id)
     {
-        $result = $this->subject->remove($id);
-
-        return response()->json($result, 200);
+        $this->subject = $this->subject->remove($id);
+        return response()->json($this->subject, 200);
     }
 }

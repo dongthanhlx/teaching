@@ -65,10 +65,19 @@ class User extends Authenticatable implements JWTSubject
         return $this->findOrFail($id);
     }
 
-    public function updateName($name, $id)
+    public function add($input)
     {
-        $user = $this->find($id);
+        return $this->create([
+            'user' => $input['name'],
+            'email' => $input['email'],
+            'password' => bcrypt($input['password']),
+            'role' => $input['role']
+        ]);
+    }
+
+    public function editName($name, User $user)
+    {
         $user->name = $name;
-        return $user->save();
+        $user->save();
     }
 }

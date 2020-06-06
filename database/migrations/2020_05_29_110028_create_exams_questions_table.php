@@ -23,6 +23,7 @@ class CreateExamsQuestionsTable extends Migration
             $table->unsignedBigInteger('created_by');
             $table->timestamps();
             $table->softDeletes();
+            $table->unsignedBigInteger('created_by');
 
             $table->foreign('exam_id')
                 ->references('id')
@@ -31,6 +32,10 @@ class CreateExamsQuestionsTable extends Migration
             $table->foreign('question_id')
                 ->references('id')
                 ->on('questions');
+
+            $table->foreign('created_by')
+                ->references('id')
+                ->on('users');
         });
     }
 

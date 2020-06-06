@@ -32,4 +32,48 @@ class Exam extends Model
     {
         return $this->belongsTo(Subject::class);
     }
+
+    public function find($id)
+    {
+        return $this->findOrFail($id);
+    }
+
+    public function add($input, $creator)
+    {
+        return $this->create([
+            'header' => $input['header'],
+            'description' => $input['description'],
+            'class' => $input['class'],
+            'time' => $input['time'],
+            'subject_id' => $input['subjectId'],
+            'note' => $input['note'],
+            'rating' => $input['rating'],
+            'type' => $input['type'],
+            'start_time' => $input['startTime'],
+            'created_by' => $creator->id,
+        ]);
+    }
+
+    public function edit($input, $id)
+    {
+        $exam = $this->find($id);
+
+        $exam->header = $input['header'];
+        $exam->description = $input['description'];
+        $exam->class = $input['class'];
+        $exam->time = $input['time'];
+        $exam->subject_id = $input['subjectId'];
+        $exam->note = $input['note'];
+        $exam->rating = $input['rating'];
+        $exam->type = $input['type'];
+        $exam->start_time = $input['startTime'];
+
+        return $exam->save();
+    }
+
+    public function remove($id)
+    {
+        $exam = $this->find($id);
+        return $exam->delete();
+    }
 }

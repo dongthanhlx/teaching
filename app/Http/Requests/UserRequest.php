@@ -6,7 +6,7 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class QuestionRequest extends FormRequest
+class UserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,10 +26,11 @@ class QuestionRequest extends FormRequest
     public function rules()
     {
         return [
-            'content' => 'required|string',
-            'class' => 'nullable|numeric',
-            'subjectId' => 'required|numeric',
-            'tags' => 'nullable|string'
+            'name' => 'required|string|max:100',
+            'email' => 'required|email|max:255|unique:users',
+            'password' => 'required|string|min:8|max:255|confirmed',
+            'password_confirmation' => 'required|string|min:8|max:255',
+            'role' => 'required|in:student,teacher',
         ];
     }
 
@@ -37,8 +38,10 @@ class QuestionRequest extends FormRequest
     {
         return [
             'required' => 'The :attribute field is required',
-            'numeric' => 'The :attribute field must numeric',
-            'string' => 'The :attribute field must string'
+            'string' => 'The :attribute field must be string',
+            'email' => 'We need to know your e-mail address!',
+            'in' => 'The :attribute must be one of the following types: :values',
+            'min' => 'Password require min :min characters'
         ];
     }
 

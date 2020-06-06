@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Answer;
 use App\Http\Requests\AnswerRequest;
-use Illuminate\Http\Request;
 
 class AnswerController extends Controller
 {
@@ -14,30 +13,9 @@ class AnswerController extends Controller
      * AnswerController constructor.
      * @param $answer
      */
-    public function __construct()
+    public function __construct(Answer $answer)
     {
-        $this->answer = new Answer();
-    }
-
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $this->answer = $answer;
     }
 
     /**
@@ -48,33 +26,9 @@ class AnswerController extends Controller
      */
     public function store(AnswerRequest $request)
     {
-        $validated = $request->validated();
-        if (! $validated) return null;
-        $this->answer->add($request);
-
+        $request->validated();
+        $this->answer = $this->answer->add($request->all(), $request->user());
         return response()->json($this->answer, 200);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-
     }
 
     /**
@@ -86,11 +40,9 @@ class AnswerController extends Controller
      */
     public function update(AnswerRequest $request, $id)
     {
-        $validated = $request->validated();
-        if (! $validated) return null;
-
-        $answer = $this->answer->edit($request, $id);
-        return response()->json($answer, 200);
+        $request->validated();
+        $this->answer = $this->answer->edit($request, $id);
+        return response()->json($this->answer, 200);
     }
 
     /**
@@ -101,8 +53,7 @@ class AnswerController extends Controller
      */
     public function destroy($id)
     {
-        $result = $this->answer->remove($id);
-
-        return response()->json($result, 200);
+        $this->answer = $this->answer->remove($id);
+        return response()->json($this->answer, 200);
     }
 }

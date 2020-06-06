@@ -5,39 +5,15 @@ namespace App\Http\Controllers;
 use App\Http\Requests\QuestionRequest;
 use App\Question;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class QuestionController extends Controller
 {
     protected $question;
 
-    /**
-     * QuestionController constructor.
-     * @param $question
-     */
-    public function __construct()
+    public function __construct(Question $question)
     {
-        $this->question = new Question();
-    }
-
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $this->question = $question;
     }
 
     /**
@@ -48,34 +24,9 @@ class QuestionController extends Controller
      */
     public function store(QuestionRequest $request)
     {
-        $validated = $request->validated();
-        if (!$validated) return null;
-
-        $result = $this->question->add($request);
-
-        return response()->json($request, 200);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        $request->validated();
+        $this->question = $this->question->add($request->all(), $request->user());
+        return response()->json($this->question, 200);
     }
 
     /**
@@ -87,13 +38,9 @@ class QuestionController extends Controller
      */
     public function update(QuestionRequest $request, $id)
     {
-        $validated = $request->validated();
-
-        if (! $validated) return null;
-
-        $result = $this->question->edit($request, $id);
-
-        return response()->json($request, 200);
+        $request->validated();
+        $this->question = $this->question->edit($request, $id);
+        return response()->json($this->question, 200);
     }
 
     /**
@@ -104,8 +51,7 @@ class QuestionController extends Controller
      */
     public function destroy($id)
     {
-        $result = $this->question->remove($id);
-
-        return response($result, 200);
+        $this->question = $this->question->remove($id);
+        return response($this->question, 200);
     }
 }

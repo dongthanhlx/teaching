@@ -29,22 +29,22 @@ class Question extends Model
         return $this->findOrFail($id);
     }
 
-    public function add($request)
+    public function add($input, $creator)
     {
         return $this->create([
-            'content' => $request->content,
-            'class' => $request->class,
-            'subject_id' => $request->subjectId,
-            'tags' => $request->tags,
-            'created_by' => $request->user()->id
+            'content' => $input['content'],
+            'class' => $input['class'],
+            'subject_id' => $input['subjectId'],
+            'tags' => $input['tags'],
+            'created_by' => $creator->id
         ]);
     }
 
-    public function edit($id, $input)
+    public function edit($input, $id)
     {
         $question = $this->find($id);
 
-        $question->content =  $input['content'];
+        $question->content = $input['content'];
         $question->class = $input['class'];
         $question->subject_id = $input['subjectId'];
         $question->tags = $input['tags'];

@@ -3,24 +3,32 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserDetailRequest;
-use App\User;
-use Illuminate\Http\Request;
+use App\UserDetail;
 
 class UserDetailController extends Controller
 {
-    public function update(UserDetailRequest $request, $id)
+    protected $userDetail;
+
+    /**
+     * UserDetailController constructor.
+     * @param $userDetail
+     */
+    public function __construct(UserDetail $userDetail)
     {
-        $validated = $request->validated();
-        if(!$validated) return null;
+        $this->userDetail = $userDetail;
+    }
 
-        $userDetail = User::findOrFail($id);
-        $userDetail->birthday = $request->birthday;
-        $userDetail->school = $request->school;
-        $userDetail->phone = $request->phone;
-        $userDetail->address = $request->address;
-        $userDetail->class = $request->class;
-        $userDetail->save();
+    public function store(UserDetailRequest $request)
+    {
+        $request->validated();
+        $this->userDetail = $this->userDetail->add($request->all(), $request->user());
+        return response($this->userDetail, 200);
+    }
 
-        return $userDetail;
+    public function update(UserDetailRequest $request)
+    {
+        $request->validated();
+        $this->userDetail = $this->userDetail->edit($request->all(), $request->user());
+        return response()->json($this->userDetail, 200);
     }
 }

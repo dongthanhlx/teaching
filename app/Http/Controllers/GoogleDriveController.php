@@ -29,14 +29,18 @@ class GoogleDriveController extends Controller
             ->where('filename', '=', pathinfo($fileName, PATHINFO_FILENAME))
             ->where('extension', '=', pathinfo($fileName, PATHINFO_EXTENSION))
             ->first(); // there can be duplicate file names!
-
+/*
         $service = Storage::cloud()->getAdapter()->getService();
         $permission = new \Google_Service_Drive_Permission();
         $permission->setRole('reader');
         $permission->setType('anyone');
         $permission->setAllowFileDiscovery(false);
-        $permissions = $service->permissions->create($file['basename'], $permission);
+        $permissions = $service->permissions->create($file['basename'], $permission);*/
 
-        return 'https://drive.google.com/file/d/' . $file['path'] . '/view?usp=sharing';
+        $response = [
+            'link' => 'https://drive.google.com/file/d/' . $file['path'] . '/view?usp=sharing'
+        ];
+
+        return response()->json($response, 200);
     }
 }

@@ -29,20 +29,20 @@ class ClassModel extends Model
         return $this->findOrFail($id);
     }
 
-    public function add($request)
+    public function add($input, $creator)
     {
         return $this->create([
-            'name' => $request->name,
-            'code' => $request->code,
-            'teacher_id' => $request->user()->id,
+            'name' => $input['name'],
+            'code' => $input['code'],
+            'teacher_id' => $creator->id,
         ]);
     }
 
-    public function edit($request, $id)
+    public function edit($input, $id)
     {
         $class = $this->find($id);
-        $class->name = $request->name;
-        $class->code = $request->code;
+        $class->name = $input['name'];
+        $class->code = $input['code'];
         return $class->save();
     }
 

@@ -24,10 +24,10 @@ class UserDetail extends Model
         return $this->findOrFail($id);
     }
 
-    public function add($input)
+    public function add($input, $creator)
     {
         return $this->create([
-            'user_id' => $input['userId'],
+            'user_id' => $creator->id,
             'birthday' => $input['birthday'],
             'phone' => $input['phone'],
             'school' => $input['school'],
@@ -36,9 +36,10 @@ class UserDetail extends Model
         ]);
     }
 
-    public function edit($id, $input)
+    public function edit($input, $editor)
     {
-        $userDetail = $this->find($id);
+        $userDetail = $this->find($editor->id);
+        (new User())->editName($input['name'], $editor);
         $userDetail->birthday = $input['birthday'];
         $userDetail->phone = $input['phone'];
         $userDetail->school = $input['school'];

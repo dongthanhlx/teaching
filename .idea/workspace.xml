@@ -2,27 +2,36 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fde26e7f-4a68-4946-aa19-bd9f9dc6ad2a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Middleware/JwtMiddleware.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Requests/ExamRequest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Requests/UserRequest.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Answer.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Answer.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/ClassModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/ClassModel.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Exam.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Exam.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AnswerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AnswerController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ClassController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ClassController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ExamController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ExamController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/GoogleDriveController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/GoogleDriveController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/JWTAuthController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/JWTAuthController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/QuestionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/QuestionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SubjectController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SubjectController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserDetailController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserDetailController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Kernel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Jobs/PutFile.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Jobs/PutFile.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Requests/AnswerRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/AnswerRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Requests/ClassRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/ClassRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Requests/QuestionRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/QuestionRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Requests/SubjectRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/SubjectRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Requests/UserDetailRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/UserDetailRequest.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Question.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Question.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Subject.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Subject.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/UserDetail.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/UserDetail.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bootstrap/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/bootstrap/app.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/auth.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/auth.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_05_29_105236_create_subjects_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_05_29_090000_create_subjects_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_05_29_090000_create_subjects_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_05_29_090000_create_subjects_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_05_29_110028_create_exams_questions_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_05_29_110028_create_exams_questions_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/welcome.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/temp/welcome.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -168,6 +177,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\Workspace\projects\du-an\teaching\resources\views\temp" />
       <recent name="F:\Workspace\projects\du-an\teaching\database\migrations" />
       <recent name="F:\Workspace\projects\du-an\teaching\database\factories" />
       <recent name="F:\Workspace\projects\du-an\teaching\database\seeds" />
@@ -202,7 +212,8 @@
       <option name="presentableId" value="Default" />
       <updated>1590739563558</updated>
       <workItem from="1590739564904" duration="43073000" />
-      <workItem from="1591172910803" duration="10979000" />
+      <workItem from="1591172910803" duration="31047000" />
+      <workItem from="1591414519764" duration="1641000" />
     </task>
     <servers />
   </component>
@@ -214,7 +225,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
