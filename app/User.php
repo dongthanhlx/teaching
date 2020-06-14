@@ -87,7 +87,7 @@ class User extends Authenticatable implements JWTSubject
         return $this->belongsToMany(ClassModel::class, 'classes_students', 'class_id', 'user_id');
     }
 
-    protected function notifications()
+    public function notifications()
     {
         return $this->belongsToMany(Notification::class,'students_notifications', 'student_id', 'notification_id');
     }
