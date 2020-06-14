@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fde26e7f-4a68-4946-aa19-bd9f9dc6ad2a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_05_29_094100_create_tags_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_05_29_094100_create_tags_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -189,7 +189,7 @@
       <workItem from="1590739564904" duration="43073000" />
       <workItem from="1591172910803" duration="31047000" />
       <workItem from="1591414519764" duration="4437000" />
-      <workItem from="1591501899554" duration="59318000" />
+      <workItem from="1591501899554" duration="59479000" />
     </task>
     <servers />
   </component>
