@@ -59,7 +59,7 @@ class User extends Authenticatable implements JWTSubject
     public function add($input)
     {
         return $this->create([
-            'user' => $input['name'],
+            'name' => $input['name'],
             'email' => $input['email'],
             'password' => bcrypt($input['password']),
             'role' => $input['role']
