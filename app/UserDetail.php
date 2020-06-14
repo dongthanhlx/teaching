@@ -14,10 +14,6 @@ class UserDetail extends Model
         'created_at', 'updated_at'
     ];
 
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
 
     public function find($id)
     {
@@ -47,5 +43,10 @@ class UserDetail extends Model
         $userDetail->avatar = $input['avatar'];
 
         return $userDetail->save();
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

@@ -23,16 +23,6 @@ class Exam extends Model
         'created_at', 'updated_at'
     ];
 
-    public function questions()
-    {
-        return $this->belongsToMany(Question::class, 'exams_questions', 'exam_id', 'question_id');
-    }
-
-    public function subject()
-    {
-        return $this->belongsTo(Subject::class);
-    }
-
     public function find($id)
     {
         return $this->findOrFail($id);
@@ -75,5 +65,20 @@ class Exam extends Model
     {
         $exam = $this->find($id);
         return $exam->delete();
+    }
+
+    public function questions()
+    {
+        return $this->belongsToMany(Question::class, 'exams_questions', 'exam_id', 'question_id');
+    }
+
+    public function subject()
+    {
+        return $this->belongsTo(Subject::class);
+    }
+
+    public function addQuestion(Question $question)
+    {
+        return $this->questions()->save($question);
     }
 }

@@ -21,3 +21,4 @@ Route::post('login', 'JWTAuthController@login')->name('login');
 Route::post('register', 'JWTAuthController@register')->name('register');
 Route::post('upload', 'GoogleDriveController@store')->name('upload');*/
 Route::get('/user', 'UserController@index');
+Route::get('class', 'ClassController@teacher');

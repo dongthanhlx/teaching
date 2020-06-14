@@ -14,11 +14,6 @@ class Answer extends Model
         'created_at', 'updated_at'
     ];
 
-    public function isTrue()
-    {
-        return $this->is_true;
-    }
-
     public function find($id)
     {
         return $this->findOrFail($id);
@@ -48,5 +43,10 @@ class Answer extends Model
     {
         $answer = $this->find($id);
         return $answer->delete();
+    }
+
+    public function isTrue()
+    {
+        return $this->is_true;
     }
 }

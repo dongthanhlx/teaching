@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class ClassModel extends Model
 {
+    protected $table = 'classes';
+
     protected $fillable = [
         'name', 'code', 'teacher_id'
     ];
@@ -14,17 +16,7 @@ class ClassModel extends Model
         'created_at', 'updated_at'
     ];
 
-    public function teacher()
-    {
-        return $this->hasOne(User::class, 'teacher_id');
-    }
-
-    public function students()
-    {
-        return $this->belongsToMany(User::class, 'classes_users', 'class_id', 'user_id');
-    }
-
-    protected function find($id)
+    public function find($id)
     {
         return $this->findOrFail($id);
     }
@@ -50,5 +42,40 @@ class ClassModel extends Model
     {
         $class = $this->find($id);
         return $class->delete();
+    }
+
+    public function teacher()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function students()
+    {
+        return $this->belongsToMany(User::class, 'classes_students', 'class_id', 'user_id');
+    }
+
+    public function hasStudent(User $user)
+    {
+        return $this->students()->where('users.id', '=', $user->id);
+    }
+
+    public function exams()
+    {
+        return $this->belongsToMany(Exam::class, 'exams_classes', 'class_id', 'exam_id');
+    }
+
+    public function addExam(Exam $exam)
+    {
+        return $this->exams()->save($exam);
+    }
+
+    public function addStudent(User $user)
+    {
+        return $this->students()->save($user);
+    }
+
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class, 'class_id');
     }
 }

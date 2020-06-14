@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateQuestionsTable extends Migration
+class CreateNotificationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,22 +13,18 @@ class CreateQuestionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('questions', function (Blueprint $table) {
+        Schema::create('notifications', function (Blueprint $table) {
             $table->id();
-            $table->text('content');
-            $table->integer('class');
-            $table->unsignedBigInteger('subject_id');
-            $table->unsignedBigInteger('tag_id')->nullable();
+            $table->string('type');
+            $table->text('data');
+            $table->unsignedBigInteger('class_id');
             $table->unsignedBigInteger('created_by');
             $table->timestamps();
 
-            $table->foreign('subject_id')
+            $table->foreign('class_id')
                 ->references('id')
-                ->on('subjects');
-
-            $table->foreign('tag_id')
-                ->references('id')
-                ->on('tags');
+                ->on('classes')
+                ->onDelete('cascade');
 
             $table->foreign('created_by')
                 ->references('id')
@@ -43,6 +39,6 @@ class CreateQuestionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('questions');
+        Schema::dropIfExists('notifications');
     }
 }

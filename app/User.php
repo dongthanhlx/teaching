@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Collection;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
@@ -50,16 +51,6 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
-    public function detail()
-    {
-        return $this->hasOne(UserDetail::class);
-    }
-
-    public function role()
-    {
-        return $this->role;
-    }
-
     public function find($id)
     {
         return $this->findOrFail($id);
@@ -79,5 +70,35 @@ class User extends Authenticatable implements JWTSubject
     {
         $user->name = $name;
         $user->save();
+    }
+
+    public function detail()
+    {
+        return $this->hasOne(UserDetail::class);
+    }
+
+    public function role()
+    {
+        return $this->role;
+    }
+
+    public function classes()
+    {
+        return $this->belongsToMany(ClassModel::class, 'classes_students', 'class_id', 'user_id');
+    }
+
+    protected function notifications()
+    {
+        return $this->belongsToMany(Notification::class,'students_notifications', 'student_id', 'notification_id');
+    }
+
+    public function readNotifications(ClassModel $class)
+    {
+        return $this->notifications()->where('class_id', '=', $class->id)->wherePivotNotNull('read_at');
+    }
+
+    public function unreadNotifications(ClassModel $class)
+    {
+        return $this->notifications()->where('class_id', '=', $class->id)->wherePivotNull('read_at');
     }
 }

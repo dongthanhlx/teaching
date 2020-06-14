@@ -17,7 +17,6 @@ class CreateExamsTable extends Migration
             $table->id();
             $table->string('header')->nullable();
             $table->string('description')->nullable();
-            $table->integer('class')->unique();
             $table->integer('time')->nullable();
             $table->unsignedBigInteger('subject_id')->nullable();
             $table->string('note')->nullable();

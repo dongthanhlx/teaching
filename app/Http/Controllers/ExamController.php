@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\TestCreated;
 use App\Exam;
 use App\Http\Requests\ExamRequest;
 use Illuminate\Http\Request;

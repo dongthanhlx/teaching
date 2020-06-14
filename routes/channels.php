@@ -1,5 +1,8 @@
 <?php
 
+use App\Broadcasting\ClassChannel;
+use App\ClassModel;
+use App\User;
 use Illuminate\Support\Facades\Broadcast;
 
 /*
@@ -13,6 +16,10 @@ use Illuminate\Support\Facades\Broadcast;
 |
 */
 
-Broadcast::channel('App.User.{id}', function ($user, $id) {
-    return (int) $user->id === (int) $id;
+Broadcast::channel('user.{userId}', function ($user, $userId) {
+    return $user->id === $userId;
+});
+
+Broadcast::channel('class', function ($user) {
+    return true;
 });

@@ -14,15 +14,6 @@ class Question extends Model
         'created_at', 'updated_at'
     ];
 
-    public function answers()
-    {
-        return $this->hasMany(Answer::class);
-    }
-
-    public function subject()
-    {
-        return $this->belongsTo(Subject::class);
-    }
 
     public function find($id)
     {
@@ -57,4 +48,15 @@ class Question extends Model
         $question = $this->find($id);
         return $question->delete();
     }
+
+    public function answers()
+    {
+        return $this->hasMany(Answer::class);
+    }
+
+    public function subject()
+    {
+        return $this->belongsTo(Subject::class);
+    }
+
 }

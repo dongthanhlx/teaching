@@ -1,5 +1,7 @@
 <?php
 
+use App\ClassModel;
+use App\Events\TestCreated;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -29,5 +31,5 @@ Route::middleware('jwt.verify')->group(function () {
     Route::put('questions/{id}', 'QuestionController@update');
     Route::delete('questions/{id}', 'QuestionController@destroy');
 
-
+    Route::put('addExam/{class}', 'ClassController@addExam');
 });

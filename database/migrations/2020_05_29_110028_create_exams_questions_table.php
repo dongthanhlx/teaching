@@ -20,7 +20,6 @@ class CreateExamsQuestionsTable extends Migration
             $table->enum('type', ['draft', 'standard', 'public'])->default('draft')->nullable();
             $table->string('path')->nullable();
             $table->enum('question_type', ['manual', 'link']);
-            $table->unsignedBigInteger('created_by');
             $table->timestamps();
             $table->softDeletes();
             $table->unsignedBigInteger('created_by');
