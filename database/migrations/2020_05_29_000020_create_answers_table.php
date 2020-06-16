@@ -25,6 +25,10 @@ class CreateAnswersTable extends Migration
                 ->references('id')
                 ->on('questions')
                 ->onDelete('cascade');
+
+            $table->foreign('created_by')
+                ->references('id')
+                ->on('users');
         });
     }
 

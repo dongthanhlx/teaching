@@ -16,19 +16,9 @@ class CreateQuestionsTable extends Migration
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
             $table->text('content');
-            $table->integer('class');
-            $table->unsignedBigInteger('subject_id');
-            $table->unsignedBigInteger('tag_id')->nullable();
+            $table->boolean('public')->default(false);
             $table->unsignedBigInteger('created_by');
             $table->timestamps();
-
-            $table->foreign('subject_id')
-                ->references('id')
-                ->on('subjects');
-
-            $table->foreign('tag_id')
-                ->references('id')
-                ->on('tags');
 
             $table->foreign('created_by')
                 ->references('id')

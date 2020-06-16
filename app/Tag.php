@@ -37,4 +37,24 @@ class Tag extends Model
         $tag = $this->find($id);
         return $tag->delete();
     }
+
+    public function questions()
+    {
+        return $this->belongsToMany(
+            Question::class,
+            'questions_tags',
+            'tag_id',
+            'question_id'
+        );
+    }
+
+    public function testSubjects()
+    {
+        return $this->belongsToMany(
+            TestSubject::class,
+            'test_subjects_tags',
+            'tag_id',
+            'test_subject_id'
+        );
+    }
 }

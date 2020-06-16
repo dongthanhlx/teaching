@@ -17,7 +17,6 @@ class CreateUserDetailsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->date('birthday')->nullable();
             $table->string('school')->nullable();
-            $table->enum('role', ['student', 'teacher']);
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
             $table->string('avatar')->nullable();

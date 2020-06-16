@@ -7,13 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class Question extends Model
 {
     protected $fillable = [
-        'content', 'class', 'subject_id', 'tags', 'created_by'
+        'content', 'status', 'created_by'
     ];
 
     protected $hidden = [
         'created_at', 'updated_at'
     ];
-
 
     public function find($id)
     {
@@ -24,9 +23,6 @@ class Question extends Model
     {
         return $this->create([
             'content' => $input['content'],
-            'class' => $input['class'],
-            'subject_id' => $input['subjectId'],
-            'tags' => $input['tags'],
             'created_by' => $creator->id
         ]);
     }
@@ -36,9 +32,6 @@ class Question extends Model
         $question = $this->find($id);
 
         $question->content = $input['content'];
-        $question->class = $input['class'];
-        $question->subject_id = $input['subjectId'];
-        $question->tags = $input['tags'];
 
         return $question->save();
     }
@@ -54,9 +47,56 @@ class Question extends Model
         return $this->hasMany(Answer::class);
     }
 
-    public function subject()
+    public function detail()
     {
-        return $this->belongsTo(Subject::class);
+        return $this->with('answers');
     }
 
+    public function tags()
+    {
+        return $this->belongsToMany(
+            Tag::class,
+            'questions_tags',
+            'question_id',
+            'tag_id'
+        );
+    }
+
+    public function public(bool $status, $id)
+    {
+        $question = $this->find($id);
+        $question->public = $status;
+        return $question;
+    }
+
+    public function createdBy()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+
+    public function getAll()
+    {
+        $questions = $this->all();
+
+        foreach ($questions as $question) {
+            $question->with('tags');
+            $question->with('createdBy');
+            $question->with('answers');
+        }
+
+        return $questions;
+    }
+
+    public function publicStatus()
+    {
+        $questions = $this->all()->where('public', '=', true);
+
+        foreach ($questions as $question) {
+            $question->with('tags');
+            $question->with('createdBy');
+            $question->with('answers');
+        }
+
+        return $questions;
+    }
 }

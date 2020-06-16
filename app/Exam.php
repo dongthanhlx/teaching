@@ -11,7 +11,6 @@ class Exam extends Model
         'description',
         'class',
         'time',
-        'subject_id',
         'note',
         'rating',
         'type',
@@ -35,7 +34,6 @@ class Exam extends Model
             'description' => $input['description'],
             'class' => $input['class'],
             'time' => $input['time'],
-            'subject_id' => $input['subjectId'],
             'note' => $input['note'],
             'rating' => $input['rating'],
             'type' => $input['type'],
@@ -52,7 +50,6 @@ class Exam extends Model
         $exam->description = $input['description'];
         $exam->class = $input['class'];
         $exam->time = $input['time'];
-        $exam->subject_id = $input['subjectId'];
         $exam->note = $input['note'];
         $exam->rating = $input['rating'];
         $exam->type = $input['type'];
@@ -67,18 +64,33 @@ class Exam extends Model
         return $exam->delete();
     }
 
-    public function questions()
+    public function testSubjects()
     {
-        return $this->belongsToMany(Question::class, 'exams_questions', 'exam_id', 'question_id');
+        return $this->belongsToMany(
+            TestSubject::class,
+            'exams_test_subjects',
+            'exam_id',
+            'test_subject_id'
+        );
     }
 
-    public function subject()
+    public function addTestSubject(TestSubject $testSubject)
     {
-        return $this->belongsTo(Subject::class);
+        return $this->testSubjects()->attach($testSubject->id);
     }
 
-    public function addQuestion(Question $question)
+    public function removeTestSubject(TestSubject $testSubject)
     {
-        return $this->questions()->save($question);
+        return $this->testSubjects()->detach($testSubject->id);
+    }
+
+    public function classes()
+    {
+        return $this->belongsToMany(
+            ClassModel::class,
+            'exams_classes',
+            'exam_id',
+            'class_id'
+        );
     }
 }

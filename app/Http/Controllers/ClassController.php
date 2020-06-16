@@ -6,6 +6,7 @@ use App\ClassModel;
 use App\Events\TestCreated;
 use App\Exam;
 use App\Http\Requests\ClassRequest;
+use App\User;
 use Illuminate\Http\Request;
 
 class ClassController extends Controller
@@ -55,5 +56,42 @@ class ClassController extends Controller
         event(new TestCreated($class));
         broadcast(new TestCreated($class))->toOthers();
         return 'Success';
+    }
+
+    public function classes(User $student)
+    {
+        $classes = $student->classes()->get(['name', 'code']);
+
+        foreach ($classes as $class) {
+            $class->teacher = $class->teacher()->get(['name', 'phone']);
+        }
+
+        return response()->json($classes, 200);
+    }
+
+    public function teachingClasses(User $teacher)
+    {
+        $classes = $teacher->teachingClasses()->get(['name', 'code']);
+
+        foreach ($classes as $class) {
+            $class->student_enrolled_length = $class->students()->count();
+        }
+
+        return response()->json($classes, 200);
+    }
+
+    public function classesDetail(User $user, ClassModel $class)
+    {
+         if ($class->hasStudent($user) == null) {
+             return response()->json('You are not in this class', 200);
+         }
+
+         $teacher = $class->teacher()->get();
+         $exams = $class->exams()->get();
+
+         $class->teacher = $teacher;
+         $class->exams = $exams;
+
+
     }
 }

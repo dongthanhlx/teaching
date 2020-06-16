@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class UserDetail extends Model
 {
     protected $fillable = [
-        'user_id', 'birthday', 'phone', 'school', 'address', 'avatar',
+        'user_id', 'birthday', 'phone', 'school', 'address', 'avatar', 'class'
     ];
 
     protected $hidden = [
@@ -28,7 +28,8 @@ class UserDetail extends Model
             'phone' => $input['phone'],
             'school' => $input['school'],
             'address' => $input['address'],
-            'avatar' => $input['avatar']
+            'avatar' => $input['avatar'],
+            'class' => $input['class']
         ]);
     }
 
@@ -41,6 +42,7 @@ class UserDetail extends Model
         $userDetail->school = $input['school'];
         $userDetail->address = $input['address'];
         $userDetail->avatar = $input['avatar'];
+        $userDetail->class = $input['class'];
 
         return $userDetail->save();
     }

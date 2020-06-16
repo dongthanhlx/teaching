@@ -9,7 +9,7 @@ class ClassModel extends Model
     protected $table = 'classes';
 
     protected $fillable = [
-        'name', 'code', 'teacher_id'
+        'name', 'description', 'code', 'teacher_id'
     ];
 
     protected $hidden = [
@@ -25,6 +25,7 @@ class ClassModel extends Model
     {
         return $this->create([
             'name' => $input['name'],
+            'description' => $input['description'],
             'code' => $input['code'],
             'teacher_id' => $creator->id,
         ]);
@@ -34,6 +35,7 @@ class ClassModel extends Model
     {
         $class = $this->find($id);
         $class->name = $input['name'];
+        $class->description = $input['description'];
         $class->code = $input['code'];
         return $class->save();
     }
@@ -46,12 +48,17 @@ class ClassModel extends Model
 
     public function teacher()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class)->with('detail');
     }
 
     public function students()
     {
-        return $this->belongsToMany(User::class, 'classes_students', 'class_id', 'user_id');
+        return $this->belongsToMany(
+            User::class,
+            'classes_students',
+            'class_id',
+            'user_id'
+        )->with('detail');
     }
 
     public function hasStudent(User $user)
@@ -61,17 +68,27 @@ class ClassModel extends Model
 
     public function exams()
     {
-        return $this->belongsToMany(Exam::class, 'exams_classes', 'class_id', 'exam_id');
+        return $this->belongsToMany(
+            Exam::class,
+            'exams_classes',
+            'class_id',
+            'exam_id'
+        );
     }
 
     public function addExam(Exam $exam)
     {
-        return $this->exams()->save($exam);
+        return $this->exams()->attach($exam->id);
     }
 
     public function addStudent(User $user)
     {
-        return $this->students()->save($user);
+        return $this->students()->attach($user->id);
+    }
+
+    public function removeStudent(User $user)
+    {
+        return $this->students()->detach($user->id);
     }
 
     public function notifications()

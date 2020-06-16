@@ -28,4 +28,5 @@ class UserController extends Controller
     {
         return csrf_token();
     }
+
 }

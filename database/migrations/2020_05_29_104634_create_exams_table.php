@@ -18,7 +18,6 @@ class CreateExamsTable extends Migration
             $table->string('header')->nullable();
             $table->string('description')->nullable();
             $table->integer('time')->nullable();
-            $table->unsignedBigInteger('subject_id')->nullable();
             $table->string('note')->nullable();
             $table->integer('rating')->nullable();
             $table->enum('type', ['online', 'practice'])
@@ -27,10 +26,6 @@ class CreateExamsTable extends Migration
             $table->dateTime('start_time')->nullable();
             $table->unsignedBigInteger('created_by');
             $table->timestamps();
-
-            $table->foreign('subject_id')
-                ->references('id')
-                ->on('subjects');
 
             $table->foreign('created_by')
                 ->references('id')
