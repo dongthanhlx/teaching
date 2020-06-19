@@ -14,7 +14,6 @@ class UserDetail extends Model
         'created_at', 'updated_at'
     ];
 
-
     public function find($id)
     {
         return $this->findOrFail($id);

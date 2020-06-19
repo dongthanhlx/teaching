@@ -30,4 +30,12 @@ Route::middleware('jwt.verify')->group(function () {
     Route::delete('questions/{id}', 'QuestionController@destroy');
 
     Route::put('addExam/{class}', 'ClassController@addExam');
+
+    Route::resource('userDetail', 'UserDetailController');
+    Route::resource('questions', 'QuestionController');
+    Route::resource('answers', 'AnswerController');
+    Route::resource('exams', 'ExamController');
+    Route::resource('classes', 'ClassController');
+    Route::resource('testSubjects', 'TestSubjectController');
+    Route::resource('tags', 'TagController');
 });

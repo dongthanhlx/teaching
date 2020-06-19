@@ -36,7 +36,8 @@ class AnswerRequest extends FormRequest
     {
         return [
             'required' => 'The :attribute field is required',
-            'boolean' => 'This answer is right or wrong'
+            'boolean' => 'This answer is right or wrong',
+            'numeric' => 'This question_id is right or wrong'
         ];
     }
 

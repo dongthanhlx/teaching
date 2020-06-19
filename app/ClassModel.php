@@ -13,7 +13,7 @@ class ClassModel extends Model
     ];
 
     protected $hidden = [
-        'created_at', 'updated_at'
+        'created_at', 'updated_at', 'teacher_id'
     ];
 
     public function find($id)
@@ -48,7 +48,7 @@ class ClassModel extends Model
 
     public function teacher()
     {
-        return $this->belongsTo(User::class)->with('detail');
+        return $this->belongsTo(User::class);
     }
 
     public function students()

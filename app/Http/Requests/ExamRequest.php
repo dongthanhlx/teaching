@@ -29,17 +29,19 @@ class ExamRequest extends FormRequest
             'header' => 'nullable|string',
             'description' => 'nullable|string',
             'class' => 'nullable|numeric',
-            'subjectId' => 'nullable|numeric',
+            'time' => 'nullable|numeric',
             'note' => 'nullable|string',
+            'rating' => 'nullable',
             'type' => 'nullable|string',
-            'startTime' => 'nullable|date'
+            'startTime' => 'nullable|numeric'
         ];
     }
 
     public function messages()
     {
         return [
-            'string' => 'The :attribute field must be string'
+            'string' => 'The :attribute field must be string',
+            'numeric' => 'The :attribute field must be numeric'
         ];
     }
 

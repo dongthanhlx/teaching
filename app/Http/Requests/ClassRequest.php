@@ -27,8 +27,8 @@ class ClassRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'code' => 'required',
-            'teacherId' => 'required|numeric'
+            'description' => 'required',
+            'code' => 'required'
         ];
     }
 

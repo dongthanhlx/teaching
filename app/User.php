@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
@@ -29,7 +30,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token', 'role', 'created_at', 'updated_at', 'deleted_at', 'email_verified_at'
     ];
 
     /**
@@ -53,7 +54,7 @@ class User extends Authenticatable implements JWTSubject
 
     public function find($id)
     {
-        return $this->with('detail')->findOrFail($id);
+        return $this->findOrFail($id);
     }
 
     public function add($input)
@@ -74,7 +75,13 @@ class User extends Authenticatable implements JWTSubject
 
     public function detail()
     {
-       return $this->hasOne(UserDetail::class);
+        return $this->hasOne(UserDetail::class);
+    }
+
+    public function info($detail = false)
+    {
+        $this->info = $this->detail()->get($detail ? '*': ['phone', 'school'])->first();
+        return $this;
     }
 
     public function role()
@@ -87,29 +94,38 @@ class User extends Authenticatable implements JWTSubject
         return $this->belongsToMany(
             ClassModel::class,
             'classes_students',
-            'class_id',
-            'user_id'
+            'user_id',
+            'class_id'
         );
     }
 
     public function collapseClassesInfo()
     {
-        $classes = $this->classes();
+        $classes = $this->classes()->get();
 
-        foreach ($classes as $class) {
-            $class->with('teacher');
+        foreach ($classes as $key => $class) {
+            $teacher = $class->teacher()->get()->first();
+            $class->teacher = $teacher;
+            $class->teacher->info = $teacher->detail()->get()->first();
         }
 
         return $classes;
+    }
+
+    public function test()
+    {
+        $student = (new User())->find(9);
+        $class = (new ClassModel())->find(1);
+        return $class->hasStudent($student)->withPivot('created_at')->get()->first()->pivot->created_at;
     }
 
     public function classesDetail()
     {
         $classes = $this->collapseClassesInfo();
 
-        foreach ($classes as $class) {
-            $classes->with('exams');
-            $classes->joinTime = $class->hasStudent($this)->withPivot('created_at');
+        foreach ($classes as $key => $class) {
+            $classes[$key] = $class->with('exams')->findOrFail($class->id);
+            $classes[$key]->joinTime = $class->hasStudent($this)->withPivot('created_at')->get()->first()->pivot->created_at;
         }
 
         return $classes;
@@ -122,10 +138,10 @@ class User extends Authenticatable implements JWTSubject
 
     public function collapseTeachClasses()
     {
-        $classes = $this->teachClasses();
+        $classes = $this->teachClasses()->get();
 
         foreach ($classes as $class) {
-            $classes->student_enrolled_length = $class->students()->count();
+            $class->student_enrolled_length = $class->students()->count();
         }
 
         return $classes;
@@ -133,11 +149,10 @@ class User extends Authenticatable implements JWTSubject
 
     public function teachClassesDetail()
     {
-        $classes = $this->teachClasses();
+        $classes = $this->teachClasses()->get();
 
-        foreach ($classes as $class) {
-            $class->with('students');
-            $classes->with('exams');
+        foreach ($classes as $key => $class) {
+            $classes[$key] = $class->with('students', 'exams')->findOrFail($class->id);
         }
 
         return $classes;
@@ -163,25 +178,34 @@ class User extends Authenticatable implements JWTSubject
         return $this->notifications()->where('class_id', '=', $class->id)->wherePivotNull('read_at');
     }
 
-    public function createQuestions()
+    public function questions()
     {
-        $questions = $this->hasMany(Question::class, 'created_by');
+        return $this->hasMany(Question::class, 'created_by');
+    }
 
-        foreach ($questions as $question) {
-            $question->with('tags');
-            $question->with('answers');
+    public function questionsDetail()
+    {
+        $questions = $this->questions()->get();
+
+        foreach ($questions as $key => $question) {
+            $questions[$key] = $question->with('answers', 'tags')->find($question->id);
         }
 
         return $questions;
     }
 
-    public function createTestSubjects()
+    public function testSubjects()
     {
-        $testSubjects = $this->hasMany(TestSubject::class, 'created_by');
+        return $this->hasMany(TestSubject::class, 'created_by');
+    }
 
-        foreach ($testSubjects as $testSubject) {
-            $testSubject->questions_length = $testSubject->questions()->count();
-            $testSubject->with('tags');
+    public function testSubjectsDetail()
+    {
+        $testSubjects = $this->testSubjects()->get();
+
+        foreach ($testSubjects as $key => $testSubject) {
+            $testSubjects[$key] = $testSubject->with('tags')->findOrFail($testSubject->id);
+            $testSubjects[$key]->questions_length = $testSubject->questions()->count();
         }
 
         return $testSubjects;

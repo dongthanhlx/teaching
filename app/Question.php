@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Question extends Model
 {
     protected $fillable = [
-        'content', 'status', 'created_by'
+        'content', 'public', 'created_by'
     ];
 
     protected $hidden = [
@@ -23,6 +23,7 @@ class Question extends Model
     {
         return $this->create([
             'content' => $input['content'],
+            'public' => $input['public'],
             'created_by' => $creator->id
         ]);
     }
@@ -32,6 +33,7 @@ class Question extends Model
         $question = $this->find($id);
 
         $question->content = $input['content'];
+        $question->public = $input['public'];
 
         return $question->save();
     }

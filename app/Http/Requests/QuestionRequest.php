@@ -27,9 +27,7 @@ class QuestionRequest extends FormRequest
     {
         return [
             'content' => 'required|string',
-            'class' => 'nullable|numeric',
-            'subjectId' => 'required|numeric',
-            'tags' => 'nullable|string'
+            'public' => 'required|boolean',
         ];
     }
 
