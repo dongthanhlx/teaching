@@ -80,10 +80,8 @@ class Question extends Model
     {
         $questions = $this->all();
 
-        foreach ($questions as $question) {
-            $question->with('tags');
-            $question->with('createdBy');
-            $question->with('answers');
+        foreach ($questions as $key => $question) {
+            $questions[$key] = $question->with(['tags', 'createdBy', 'answers'])->findOrFail($question->id);
         }
 
         return $questions;

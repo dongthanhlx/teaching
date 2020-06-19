@@ -48,7 +48,7 @@ class ClassModel extends Model
 
     public function teacher()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class)->first();
     }
 
     public function students()
@@ -63,7 +63,7 @@ class ClassModel extends Model
 
     public function hasStudent(User $user)
     {
-        return $this->students()->where('users.id', '=', $user->id);
+        return $this->students()->where('users.id', '=', $user->id)->first();
     }
 
     public function exams()

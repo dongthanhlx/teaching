@@ -84,10 +84,9 @@ class TestSubject extends Model
     {
         $testSubjects = $this->all()->where('status', '=', 3);
 
-        foreach ($testSubjects as $testSubject) {
-            $testSubject->with('createdBy');
-            $testSubject->with('tags');
-            $testSubject->questions_length = $testSubject->questions()->count();
+        foreach ($testSubjects as $key => $testSubject) {
+            $testSubjects[$key] = $testSubject->with(['createdBy', 'tags'])->findOrFail($testSubject->id);
+            $testSubjects[$key]->questions_length = $testSubject->questions()->count();
         }
 
         return $testSubjects;

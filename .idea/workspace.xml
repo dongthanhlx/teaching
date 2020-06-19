@@ -4,16 +4,8 @@
     <list default="true" id="fde26e7f-4a68-4946-aa19-bd9f9dc6ad2a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/ClassModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/ClassModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Requests/AnswerRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/AnswerRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Requests/ClassRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/ClassRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Requests/ExamRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/ExamRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Requests/QuestionRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/QuestionRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Requests/SubjectRequest.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Question.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Question.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/UserDetail.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/UserDetail.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/TestSubject.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/TestSubject.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -202,7 +194,7 @@
       <workItem from="1591414519764" duration="4437000" />
       <workItem from="1591501899554" duration="86215000" />
       <workItem from="1592270177453" duration="17606000" />
-      <workItem from="1592447498008" duration="19923000" />
+      <workItem from="1592447498008" duration="21705000" />
     </task>
     <servers />
   </component>
