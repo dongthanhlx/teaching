@@ -10,6 +10,16 @@ use Illuminate\Support\Facades\Validator;
 
 class JWTAuthController extends Controller
 {
+
+
+    /**
+     * JWTAuthController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('cors');
+    }
+
     public function register(UserRequest $request) {
         $request->validated();
         $user = (new User())->add($request->all());
