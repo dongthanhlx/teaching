@@ -3,8 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="fde26e7f-4a68-4946-aa19-bd9f9dc6ad2a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/JWTAuthController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/JWTAuthController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Kernel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/CORS.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/CORS.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -193,7 +192,7 @@
       <workItem from="1591414519764" duration="4437000" />
       <workItem from="1591501899554" duration="86215000" />
       <workItem from="1592270177453" duration="17606000" />
-      <workItem from="1592447498008" duration="23896000" />
+      <workItem from="1592447498008" duration="25021000" />
     </task>
     <servers />
   </component>
